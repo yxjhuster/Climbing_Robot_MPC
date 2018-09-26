@@ -22,7 +22,7 @@ delta = Ts / N; % sample time for updating
 xk1 = xk; % Initialize the x(k+1)
 %% Loop for updating x(k+1)
 for ct = 1:N
-    xk1 = xk1 + delta * Climbing_DT(xk1, uk);
+    xk1 = xk1 + delta * Climbing_CT(xk1, uk);
 end
 % xk1 = xk1 + Ts * Climbing_DT(xk1, uk); %If you think calculation is slow,
 % remove N, and try this command instead of using loop.

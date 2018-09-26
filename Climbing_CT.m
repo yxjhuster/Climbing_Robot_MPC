@@ -42,7 +42,7 @@ C(1,2) = -m2*l1*l2*sin(t2) * t2_dot;
 C(2,1) = m2*l1*l2*sin(t1)*t1_dot;
 C(1,1) = 0;
 % assign values for N matrix
-N(1) = ((m1 + m2) * l1 * g * sin(t1) + m2*g*l2*sin(t1+t2);
+N(1) = (m1 + m2) * l1 * g * sin(t1) + m2*g*l2*sin(t1+t2);
 N(2) = m2*g*l2*sin(t1+t2);
 %% Compute the derivatives of the states
 % We know that:
