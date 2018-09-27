@@ -13,6 +13,7 @@ function dxdt = Climbing_CT(x,u)
 %   same as states (i.e. all the states are measureable)
 %   
 % dxdt is the derivative of the states.
+dxdt = zeros(4,1);
 %% Parameters
 m1 = 1;  % body mass
 m2 = 1;  % tail mass
@@ -51,7 +52,8 @@ N(2) = m2*g*l2*sin(t1+t2);
 %             state_dot_dot = inv(M) * (input - N - C * state_dot)
 input = [0 ; tau];
 state_dot = [t1_dot; t2_dot];
-state_dot_dot = M^(-1) * (input - N - C* state_dot);
+M
+state_dot_dot = inv(M) * (input - N - C* state_dot);
 %% assembly all the results
 dxdt(1) = t1_dot;
 dxdt(2) = state_dot_dot(1);

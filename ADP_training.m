@@ -45,7 +45,8 @@ for t = 0:N-1
             LHS_J(i,:) = phi(xk, u)';
         else
             xk_plus_1 = Climbing_DT(xk,u,Ts);
-            J_k_plus_1 = FinalW(:,k+1)' * phi(xk_plus_1, u); %how to find the u_plus_1
+            u_plus_1 = 20 * (rand(1) - 1/2);
+            J_k_plus_1 = FinalW(:,k+1)' * phi(xk_plus_1, u_plus_1); %how to find the u_plus_1
             J_k_t = J_k_plus_1 + R * (u * xk(4) * Ts)^2;
             RHS_J(i, :) = J_k_t;
             LHS_J(i, :) = phi(xk, u)';
