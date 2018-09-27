@@ -52,11 +52,12 @@ N(2) = m2*g*l2*sin(t1+t2);
 %             state_dot_dot = inv(M) * (input - N - C * state_dot)
 input = [0 ; tau];
 state_dot = [t1_dot; t2_dot];
-M
 state_dot_dot = inv(M) * (input - N - C* state_dot);
 %% assembly all the results
 dxdt(1) = t1_dot;
-dxdt(2) = state_dot_dot(1);
+%dxdt(2) = state_dot_dot(1);
+dxdt(2) = (t1_dot^2*l1^2*l2*m2*sin(2.0*t2) - 2.0*l1*tau*cos(t2) - 2.0*l2*tau + g*l1*l2*m2*sin(t1 + 2.0*t2) + 2.0*t1_dot^2*l1*l2^2*m2*sin(t2) + 2.0*t2_dot^2*l1*l2^2*m2*sin(t2) - 2.0*g*l1*l2*m1*sin(t1) - 1.0*g*l1*l2*m2*sin(t1) + 4.0*t1_dot*t2_dot*l1*l2^2*m2*sin(t2))/(l1^2*l2*(2.0*m1 + m2 - 1.0*m2*cos(2.0*t2)));
 dxdt(3) = t2_dot;
-dxdt(4) = state_dot_dot(2);
+%dxdt(4) = state_dot_dot(2);
+dxdt(4) = (tau*(l1^2*m1 + l1^2*m2 + l2^2*m2 + 2.0*l1*l2*m2*cos(t2)) - l1*l2*m2*(t1_dot^2*l1^2*m1*sin(t2) + t1_dot^2*l1^2*m2*sin(t2) + t1_dot^2*l2^2*m2*sin(t2) + t2_dot^2*l2^2*m2*sin(t2) - 1.0*g*l2*m1*sin(t1) - 1.0*g*l2*m2*sin(t1) + 2.0*t1_dot*t2_dot*l2^2*m2*sin(t2) + g*l1*m1*cos(t1)*sin(t2) + g*l1*m2*cos(t1)*sin(t2) + g*l2*m2*cos(t2)^2*sin(t1) + t1_dot^2*l1*l2*m2*sin(2.0*t2) + 0.5*t2_dot^2*l1*l2*m2*sin(2.0*t2) + g*l2*m2*cos(t1)*cos(t2)*sin(t2) + t1_dot*t2_dot*l1*l2*m2*sin(2.0*t2)))/(l1^2*l2^2*m2*(m1 + m2 - 1.0*m2*cos(t2)^2))
 end
