@@ -30,7 +30,7 @@ FinalW = zeros(length(phi(xk,u)),N); % the parameters for phi, 4 is the size of 
 xr = [0.6*pi;0;-0.6*pi;0];
 Q = diag([5000,500,1,500]); % Weight for final state error
 R = 20; %Weight scaler for power
-NoOfEquations = 100;
+NoOfEquations = 1000;
 RHS_J = zeros(NoOfEquations,1);%we can take it as y in Ab = y and least square problem is going to find b
 LHS_J = zeros(NoOfEquations,length(phi(xk, u))); %we can take it as A in Ab = y and least square problem is going to find b
 
@@ -38,14 +38,14 @@ for t = 0:N-1
     k = N - t;
     for i = 1:NoOfEquations
         xk = [(rand(1)-1/2) *2 * pi; (rand(1)-1/2) * 2 * pi; (rand(1)-1/2) * 2 * pi; (rand(1)-1/2) * 2 * pi];
-        u = 20 * (rand(1) - 1/2);
+        u = 10 * (rand(1) - 1/2);
         if k == N
             J_k_t = (xk - xr)'*Q*(xk - xr);
             RHS_J(i,:) = J_k_t;
             LHS_J(i,:) = phi(xk, u)';
         else
             xk_plus_1 = Climbing_DT(xk,u,Ts);
-            u_plus_1 = 20 * (rand(1) - 1/2);
+            u_plus_1 = 10 * (rand(1) - 1/2);
             J_k_plus_1 = FinalW(:,k+1)' * phi(xk_plus_1, u_plus_1); %how to find the u_plus_1
             J_k_t = J_k_plus_1 + R * (u * xk(4) * Ts)^2;
             RHS_J(i, :) = J_k_t;
