@@ -1,0 +1,21 @@
+function net = define_nn()
+    inputs = [1:4]';
+    outputs = [1:1]';
+    net = network(1, 4, [1;0;0;0], [1;0;0;0], [0 0 0 0; 1, 0, 0, 0; 0,1 0, 0; 0, 0, 1, 0], [0,0,0,1]);
+    net.layers{1}.size = 32;
+    net.layers{2}.size = 32;
+    net.layers{3}.size = 32;
+%     net.layers{3}.transferFcn = 'poslin';
+%     net.layers{3}.size = 8;
+    net = configure(net,inputs,outputs);
+    net.trainFcn = 'trainlm';
+    net.performFcn = 'mse';
+%     net.trainParam.min_grad = 0;
+    net.trainParam.epochs = 1000;
+    net.trainParam.showWindow = false;
+%     net.divideFcn = 'divideint';
+%     net.divideMode = 'sample';
+%     net.divideParam.trainRatio = 0.7;
+%     net.divideParam.valRatio = 0.15;
+%     net.divideParam.testRatio = 0.15;
+end
